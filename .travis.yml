@@ -8,11 +8,6 @@ before_install:
 #script:
 # - docker run -e CI=true britto/clienttest npm test -- --coverage
 
-after_success:
-  - if [[ "$TRAVIS_BRANCH" == "main" ]]; then
-      docker login -u $DOCKER_ID -p $DOCKER_PASSWORD ;
-      make push-image ;
-    fi
 image:
   - docker build -t britto/multi-client ./client
   - docker build -t britto/multi-nginx ./nginx
@@ -20,6 +15,8 @@ image:
   - docker build -t britto/multi-worker ./worker
   # Log in to the docker CLI
 #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 push-image:
   # take those images and push them to docker hub
    - docker push britto/multi-client
