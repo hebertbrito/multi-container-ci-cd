@@ -14,7 +14,7 @@ after_success:
   - docker build -t britto/multi-server ./server
   - docker build -t britto/multi-worker ./worker
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" docker.io
   # take those images and push them to docker hub
    - docker push britto/multi-client
    - docker push britto/multi-nginx
