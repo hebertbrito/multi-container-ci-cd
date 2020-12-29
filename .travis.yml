@@ -17,8 +17,8 @@ image:
 #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
-  - docker build -t britto/multi-worker:latest ./worker
-  - docker push britto/multi-worker:latest
+  - docker build -t hebertoliveira/multi-worker:latest ./worker
+  - docker push hebertoliveira/multi-worker:latest
 push-image:
   # take those images and push them to docker hub
    - docker push britto/multi-client:latest
