@@ -3,13 +3,13 @@ services:
   - docker
 
 before_install:
-  - docker build -t britto/client-test -f ./client/Dockerfile.dev ./client
+  - docker build -t britto/clientTest -f ./client/Dockerfile.dev ./client
 
-script:
- - docker run -e CI=true britto/client-test npm test -- --coverage
+#script:
+# - docker run -e CI=true britto/clientTest npm test -- --coverage
 
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+  - if [[ "$TRAVIS_BRANCH" == "main" ]]; then
       docker login -u $DOCKER_ID -p $DOCKER_PASSWORD ;
       make push-image ;
     fi
