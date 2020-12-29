@@ -5,6 +5,6 @@
 ```sh
 Application Architecture
 <img src="app-architecture-multicontainer.png"
-     alt="architecture multi containers"
+     alt="assets/architecture multi containers"
      style="float: left; margin-right: 10px;" />
 ```
