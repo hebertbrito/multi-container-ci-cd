@@ -9,12 +9,18 @@ script:
  - docker run -e CI=true britto/client-test npm run test -- --coverage
 
 after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker login -u $DOCKER_ID -p $DOCKER_PASSWORD ;
+      make push-image ;
+    fi
+image:
   - docker build -t britto/multi-client ./client
   - docker build -t britto/multi-nginx ./nginx
   - docker build -t britto/multi-server ./server
   - docker build -t britto/multi-worker ./worker
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+push-image:
   # take those images and push them to docker hub
    - docker push britto/multi-client
    - docker push britto/multi-nginx
