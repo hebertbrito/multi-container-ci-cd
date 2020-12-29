@@ -8,20 +8,20 @@ before_install:
 #script:
 # - docker run -e CI=true britto/clienttest npm test -- --coverage
 
-image:
-  - docker build -t britto/multi-client:latest ./client
-  - docker build -t britto/multi-nginx:latest ./nginx
-  - docker build -t britto/multi-server:latest ./server
-  - docker build -t britto/multi-worker:latest ./worker
+#image:
+#  - docker build -t britto/multi-client:latest ./client
+#  - docker build -t britto/multi-nginx:latest ./nginx
+#  - docker build -t britto/multi-server:latest ./server
+#  - docker build -t britto/multi-worker:latest ./worker
   # Log in to the docker CLI
 #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
-  - docker build -t hebertoliveira/multi-worker:latest ./worker
-  - docker push hebertoliveira/multi-worker:latest
-push-image:
+  - docker build -t $DOCKER_USERNAME/multi-worker:latest ./worker
+  - docker push $DOCKER_USERNAME/multi-worker:latest
+#push-image:
   # take those images and push them to docker hub
-   - docker push britto/multi-client:latest
-   - docker push britto/multi-nginx:latest
-   - docker push britto/multi-server:latest
-   - docker push britto/multi-worker:latest
+#   - docker push britto/multi-client:latest
+#   - docker push britto/multi-nginx:latest
+#   - docker push britto/multi-server:latest
+#   - docker push britto/multi-worker:latest
