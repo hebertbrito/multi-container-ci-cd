@@ -16,7 +16,7 @@ image:
   # Log in to the docker CLI
 #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
   - docker build -t britto/multi-worker ./worker
   - docker push britto/multi-worker
 push-image:
