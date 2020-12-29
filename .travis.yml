@@ -7,16 +7,3 @@ before_install:
 
 script:
  - docker run -e CI=true britto/client-test npm run test -- --coverage
-
-after_success:
-  - docker build -t britto/multi-client ./client
-  - docker build -t britto/multi-nginx ./nginx
-  - docker build -t britto/multi-server ./server
-  - docker build - britto/multi-worker ./worker
-  # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # take those images and push them to docker hub
-   - docker push britto/multi-client
-   - docker push britto/multi-nginx
-   - docker push britto/multi-server
-   - docker push britto/multi-worker
