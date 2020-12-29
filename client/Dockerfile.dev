@@ -5,6 +5,7 @@ WORKDIR '/app'
 COPY package.json .
 
 RUN npm install -g
+RUN npm i react-scripts -g
 
 COPY ./ ./
 #VOLUME node_modules .:/app
