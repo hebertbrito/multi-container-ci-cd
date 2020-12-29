@@ -5,6 +5,7 @@ WORKDIR '/app'
 COPY package.json .
 
 RUN npm install -g
+RUN npm install typescript -g
 RUN npm i react-scripts -g
 
 COPY ./ ./
