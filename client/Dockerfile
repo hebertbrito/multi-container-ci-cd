@@ -5,10 +5,10 @@ WORKDIR '/app'
 COPY package.json .
 
 RUN npm install -g
-
+RUN npm install react-scripts -g
 COPY ./ ./
 #VOLUME node_modules .:/app
-RUN npm run build
+RUN npm --prefix ./ run build
 
 FROM nginx
 EXPOSE 3000
