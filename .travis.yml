@@ -8,13 +8,6 @@ before_install:
 #script:
 # - docker run -e CI=true $DOCKER_USERNAME/clienttest npm run test
 
-#image:
-#  - docker build -t britto/multi-client:latest ./client
-#  - docker build -t britto/multi-nginx:latest ./nginx
-#  - docker build -t britto/multi-server:latest ./server
-#  - docker build -t britto/multi-worker:latest ./worker
-  # Log in to the docker CLI
-#  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
   - docker build -t $DOCKER_USERNAME/cont-client:latest ./client
@@ -25,8 +18,4 @@ after_success:
 #  - docker push $DOCKER_USERNAME/cont-nginx:latest
 #  - docker push $DOCKER_USERNAME/cont-server:latest
 #  - docker push $DOCKER_USERNAME/cont-worker:latest
-#push-image:
-  # take those images and push them to docker hub
-#   - docker push britto/multi-nginx:latest
-#   - docker push britto/multi-server:latest
-#   - docker push britto/multi-worker:latest
+
