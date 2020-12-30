@@ -2,12 +2,12 @@ FROM node:latest AS buildnode
 
 WORKDIR '/app'
 
-COPY package.json .
+COPY ./package.json ./package-lock.json ./
 
 RUN npm install -g
 RUN npm install react-scripts -g
-COPY ./ ./
-#VOLUME node_modules .:/app
+COPY ./package.json ./package-lock.json ./
+
 RUN npm run build
 
 COPY package.json .
