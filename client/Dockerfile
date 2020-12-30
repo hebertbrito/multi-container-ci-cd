@@ -6,10 +6,10 @@ COPY package.json .
 
 RUN npm install -g
 RUN npm install react-scripts -g
-RUN npm run build
 
 COPY ./ ./
 #VOLUME node_modules .:/app
+RUN npm run build
 
 FROM nginx
 EXPOSE 3000
