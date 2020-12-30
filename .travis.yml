@@ -5,8 +5,8 @@ services:
 before_install:
   - docker build -t $DOCKER_USERNAME/clienttest -f ./client/Dockerfile.dev ./client
 
-script:
- - docker run -e CI=true $DOCKER_USERNAME/clienttest npm run test
+#script:
+# - docker run -e CI=true $DOCKER_USERNAME/clienttest npm run test
 
 #image:
 #  - docker build -t britto/multi-client:latest ./client
@@ -17,11 +17,12 @@ script:
 #  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
+  - docker build -t USERNAME/multi-client:latest ./client
   - docker build -t $DOCKER_USERNAME/multi-worker:latest ./worker
+  - docker push $DOCKER_USERNAME/multi-client:latest
   - docker push $DOCKER_USERNAME/multi-worker:latest
 #push-image:
   # take those images and push them to docker hub
-#   - docker push britto/multi-client:latest
 #   - docker push britto/multi-nginx:latest
 #   - docker push britto/multi-server:latest
 #   - docker push britto/multi-worker:latest
