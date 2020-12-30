@@ -6,7 +6,6 @@ COPY package.json .
 
 RUN npm install -g
 RUN npm install react-scripts -g
-RUN npm install typescript -g
 COPY ./ ./
 #VOLUME node_modules .:/app
 RUN npm run build
